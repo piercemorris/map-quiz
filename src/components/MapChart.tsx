@@ -46,9 +46,9 @@ const MapChart = () => {
   }, [])
 
   return (
-    <div>
+    <div className="flex h-screen w-screen justify-center items-center flex-col gap-5">
       <ComposableMap
-        className=" border-2 border-red-600 w-6/12 h-4/6"
+        className="border-2 rounded-lg w-5/12 h-3/6"
         projection='geoMercator'
         projectionConfig={{ center: [137.7276, 33], scale: 850 }}
       >
