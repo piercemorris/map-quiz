@@ -1,27 +1,72 @@
-import React from "react";
-import { geoCentroid } from "d3-geo";
+import React, { useCallback, useEffect, useState } from "react";
 import {
   ComposableMap,
-  Geographies,
-  Geography,
-  Marker,
-  Annotation
+  ZoomableGroup
 } from "react-simple-maps";
+import MapTest from "./MapTest";
+
+export type GeographyType = {
+  rsmKey: string,
+  geometry: {
+    coordinates: number[][][]
+  },
+  properties: {
+    ID_1: string
+  }
+}
 
 const MapChart = () => {
+  const [geoList, setGeoList] = useState<GeographyType[]>()
+  const [counter, setCounter] = useState<number>(0)
+  const [selectedRegion, setSelectedRegion] = useState<GeographyType | null>(null);
+  const [selectedCoords, setSelectedCoords] = useState<[number, number]>([137.7276, 33]);
+
+  const setList = (geographies: GeographyType[]) => {
+    setGeoList(geographies)
+  }
+
+  const startQuiz = () => {
+    setRegion();
+  }
+
+  const setRegion = useCallback(() => {
+    if (geoList === undefined) return
+
+    const region = geoList[counter];
+    
+    setCounter(prev => prev + 1);
+    setSelectedRegion(region);
+    setSelectedCoords(region.geometry.coordinates.flat(Infinity) as [number, number]);
+
+  }, [counter, geoList])
+
+  const updateMapCoords = useCallback((coords: any) => {
+    console.log('coordinates updated', coords[0][0])
+    setSelectedCoords(coords[0][0]);
+  }, [])
+
   return (
     <div>
-    <ComposableMap>
-      <Geographies geography="/japan.json">
-        {({ geographies }) =>
-          geographies.map((geo) => {
-            return <Geography key={geo.rsmKey} geography={geo} />;
-          })
-        }
-      </Geographies>
-    </ComposableMap>
-  </div>
+      <ComposableMap
+        className=" border-2 border-red-600 w-6/12 h-4/6"
+        projection='geoMercator'
+        projectionConfig={{ center: [137.7276, 33], scale: 850 }}
+      >
+        <ZoomableGroup center={selectedCoords} zoom={5}>
+          <MapTest selectedGeography={selectedRegion} setGeographies={setList} />
+        </ZoomableGroup>
+      </ComposableMap>
+      <button onClick={startQuiz}>
+        Start Quiz
+      </button>
+    </div>
   );
 };
 
-export default MapChart;
+const Button = ({}) => {
+  return (
+    <button>Click me</button>
+  )
+}
+
+export default MapChart
