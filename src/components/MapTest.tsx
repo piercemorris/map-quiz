@@ -1,7 +1,7 @@
-import React, { useCallback, useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 import {
   Geography,
-  useGeographies,
+  useGeographies
 } from "react-simple-maps";
 import { GeographyType } from './MapChart';
 
