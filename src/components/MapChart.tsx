@@ -5,6 +5,7 @@ import {
 } from "react-simple-maps";
 import MapTest from "./MapTest";
 import Button from "./Button";
+import Input from "./Input";
 
 export type GeographyType = {
   rsmKey: string,
@@ -12,6 +13,7 @@ export type GeographyType = {
     coordinates: number[][][]
   },
   properties: {
+    NAME_1: string,
     ID_1: string
   }
 }
@@ -19,6 +21,8 @@ export type GeographyType = {
 const MapChart = () => {
   const [geoList, setGeoList] = useState<GeographyType[]>()
   const [counter, setCounter] = useState<number>(0)
+  const [answer, setAnswer] = useState<string>('');
+  const [hasStarted, setHasStarted] = useState<boolean>(false);
   const [selectedRegion, setSelectedRegion] = useState<GeographyType | null>(null);
   const [selectedCoords, setSelectedCoords] = useState<[number, number]>([137.7276, 33]);
 
@@ -27,7 +31,18 @@ const MapChart = () => {
   }
 
   const startQuiz = () => {
-    setRegion();
+    setHasStarted(true);
+    setRegion()
+  }
+
+  const nextQuestion = () => {
+    if (answer === selectedRegion?.properties.NAME_1) {
+      console.log('correct')
+      setAnswer('')
+      setRegion()
+    } else {
+      console.log('incorrect')
+    }
   }
 
   const setRegion = useCallback(() => {
@@ -37,6 +52,7 @@ const MapChart = () => {
     
     setCounter(prev => prev + 1);
     setSelectedRegion(region);
+    console.log('selected region', region)
     setSelectedCoords(region.geometry.coordinates.flat(Infinity) as [number, number]);
 
   }, [counter, geoList])
@@ -57,9 +73,16 @@ const MapChart = () => {
           <MapTest selectedGeography={selectedRegion} setGeographies={setList} />
         </ZoomableGroup>
       </ComposableMap>
-      <button onClick={startQuiz}>
-        Start Quiz
-      </button>
+      <Input value={answer} onChange={(e) => setAnswer(e.target.value)} />
+      {
+        hasStarted ? (
+          <Button text="Next" onClick={nextQuestion} />
+        ) : (
+          <button onClick={startQuiz}>
+            Start Quiz
+          </button>
+        )
+      }
     </div>
   );
 };

@@ -7,7 +7,7 @@ interface InputProps {
 
 const Input: React.FC<InputProps> = ({ value, onChange }) => {
   return (
-    <input type="text" value={value} onChange={onChange} />
+    <input className=' px-2 text-gray-950 font-black' type="text" value={value} onChange={onChange} />
   );
 };
 
