@@ -21,6 +21,7 @@ export type GeographyType = {
 const MapChart = () => {
   const [geoList, setGeoList] = useState<GeographyType[]>()
   const [counter, setCounter] = useState<number>(0)
+  const [score, setScore] = useState<number>(0)
   const [answer, setAnswer] = useState<string>('');
   const [hasStarted, setHasStarted] = useState<boolean>(false);
   const [selectedRegion, setSelectedRegion] = useState<GeographyType | null>(null);
@@ -37,12 +38,11 @@ const MapChart = () => {
 
   const nextQuestion = () => {
     if (answer === selectedRegion?.properties.NAME_1) {
-      console.log('correct')
-      setAnswer('')
-      setRegion()
-    } else {
-      console.log('incorrect')
-    }
+      setScore(prev => prev + 1)
+    } 
+
+    setAnswer('')
+    setRegion()
   }
 
   const setRegion = useCallback(() => {
@@ -52,7 +52,7 @@ const MapChart = () => {
     
     setCounter(prev => prev + 1);
     setSelectedRegion(region);
-    console.log('selected region', region)
+    console.log('selected region:', region.properties.NAME_1)
     setSelectedCoords(region.geometry.coordinates.flat(Infinity) as [number, number]);
 
   }, [counter, geoList])
@@ -76,7 +76,10 @@ const MapChart = () => {
       <Input value={answer} onChange={(e) => setAnswer(e.target.value)} />
       {
         hasStarted ? (
-          <Button text="Next" onClick={nextQuestion} />
+          <>
+            <Button text="Next" onClick={nextQuestion} />
+            <span>score: {score}/{counter - 1}</span>
+          </>
         ) : (
           <button onClick={startQuiz}>
             Start Quiz
