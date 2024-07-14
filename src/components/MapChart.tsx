@@ -7,6 +7,8 @@ import MapTest from "./MapTest";
 import Button from "./Button";
 import Input from "./Input";
 
+import prefectures from "~/models/prefectures";
+
 export type GeographyType = {
   rsmKey: string,
   geometry: {
@@ -17,6 +19,9 @@ export type GeographyType = {
     ID_1: string
   }
 }
+
+const isAnswerCorrect = (answer: string, prefecture: string): boolean => 
+  [prefecture.toLowerCase(), prefectures[prefecture].hiragana, prefectures[prefecture].kanji].includes(answer)
 
 const MapChart = () => {
   const [geoList, setGeoList] = useState<GeographyType[]>()
@@ -37,7 +42,7 @@ const MapChart = () => {
   }
 
   const nextQuestion = () => {
-    if (answer === selectedRegion?.properties.NAME_1) {
+    if (isAnswerCorrect(answer.toLowerCase(), selectedRegion?.properties.NAME_1!)) {
       setScore(prev => prev + 1)
     } 
 
@@ -73,10 +78,10 @@ const MapChart = () => {
           <MapTest selectedGeography={selectedRegion} setGeographies={setList} />
         </ZoomableGroup>
       </ComposableMap>
-      <Input value={answer} onChange={(e) => setAnswer(e.target.value)} />
       {
         hasStarted ? (
           <>
+            <Input value={answer} onChange={(e) => setAnswer(e.target.value)} />
             <Button text="Next" onClick={nextQuestion} />
             <span>score: {score}/{counter - 1}</span>
           </>

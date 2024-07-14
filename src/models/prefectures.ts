@@ -1,0 +1,56 @@
+interface Prefecture {
+  kanji: string;
+  hiragana: string;
+}
+
+const prefectures: { [english: string]: Prefecture } = {
+  "Hokkaido": { kanji: "北海道", hiragana: "ほっかいどう" },
+  "Aomori": { kanji: "青森県", hiragana: "あおもりけん" },
+  "Iwate": { kanji: "岩手県", hiragana: "いわてけん" },
+  "Miyagi": { kanji: "宮城県", hiragana: "みやぎけん" },
+  "Akita": { kanji: "秋田県", hiragana: "あきたけん" },
+  "Yamagata": { kanji: "山形県", hiragana: "やまがたけん" },
+  "Fukushima": { kanji: "福島県", hiragana: "ふくしまけん" },
+  "Ibaraki": { kanji: "茨城県", hiragana: "いばらきけん" },
+  "Tochigi": { kanji: "栃木県", hiragana: "とちぎけん" },
+  "Gunma": { kanji: "群馬県", hiragana: "ぐんまけん" },
+  "Saitama": { kanji: "埼玉県", hiragana: "さいたまけん" },
+  "Chiba": { kanji: "千葉県", hiragana: "ちばけん" },
+  "Tokyo": { kanji: "東京都", hiragana: "とうきょうと" },
+  "Kanagawa": { kanji: "神奈川県", hiragana: "かながわけん" },
+  "Niigata": { kanji: "新潟県", hiragana: "にいがたけん" },
+  "Toyama": { kanji: "富山県", hiragana: "とやまけん" },
+  "Ishikawa": { kanji: "石川県", hiragana: "いしかわけん" },
+  "Fukui": { kanji: "福井県", hiragana: "ふくいけん" },
+  "Yamanashi": { kanji: "山梨県", hiragana: "やまなしけん" },
+  "Nagano": { kanji: "長野県", hiragana: "ながのけん" },
+  "Gifu": { kanji: "岐阜県", hiragana: "ぎふけん" },
+  "Shizuoka": { kanji: "静岡県", hiragana: "しずおかけん" },
+  "Aichi": { kanji: "愛知県", hiragana: "あいちけん" },
+  "Mie": { kanji: "三重県", hiragana: "みえけん" },
+  "Shiga": { kanji: "滋賀県", hiragana: "しがけん" },
+  "Kyoto": { kanji: "京都府", hiragana: "きょうとふ" },
+  "Osaka": { kanji: "大阪府", hiragana: "おおさかふ" },
+  "Hyogo": { kanji: "兵庫県", hiragana: "ひょうごけん" },
+  "Nara": { kanji: "奈良県", hiragana: "ならけん" },
+  "Wakayama": { kanji: "和歌山県", hiragana: "わかやまけん" },
+  "Tottori": { kanji: "鳥取県", hiragana: "とっとりけん" },
+  "Shimane": { kanji: "島根県", hiragana: "しまねけん" },
+  "Okayama": { kanji: "岡山県", hiragana: "おかやまけん" },
+  "Hiroshima": { kanji: "広島県", hiragana: "ひろしまけん" },
+  "Yamaguchi": { kanji: "山口県", hiragana: "やまぐちけん" },
+  "Tokushima": { kanji: "徳島県", hiragana: "とくしまけん" },
+  "Kagawa": { kanji: "香川県", hiragana: "かがわけん" },
+  "Ehime": { kanji: "愛媛県", hiragana: "えひめけん" },
+  "Kochi": { kanji: "高知県", hiragana: "こうちけん" },
+  "Fukuoka": { kanji: "福岡県", hiragana: "ふくおかけん" },
+  "Saga": { kanji: "佐賀県", hiragana: "さがけん" },
+  "Nagasaki": { kanji: "長崎県", hiragana: "ながさきけん" },
+  "Kumamoto": { kanji: "熊本県", hiragana: "くまもとけん" },
+  "Oita": { kanji: "大分県", hiragana: "おおいたけん" },
+  "Miyazaki": { kanji: "宮崎県", hiragana: "みやざきけん" },
+  "Kagoshima": { kanji: "鹿児島県", hiragana: "かごしまけん" },
+  "Okinawa": { kanji: "沖縄県", hiragana: "おきなわけん" }
+};
+
+export default prefectures;
