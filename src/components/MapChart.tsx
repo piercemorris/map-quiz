@@ -1,6 +1,6 @@
 import React, { useCallback, useState } from "react"
 import { ComposableMap, ZoomableGroup } from "react-simple-maps"
-import MapTest from "./MapTest"
+import Map from "./Map"
 import Button from "./Button"
 import Input from "./Input"
 
@@ -83,10 +83,7 @@ const MapChart = () => {
         projectionConfig={{ center: [137.7276, 33], scale: 850 }}
       >
         <ZoomableGroup center={selectedCoords} zoom={5}>
-          <MapTest
-            selectedGeography={selectedRegion}
-            setGeographies={setList}
-          />
+          <Map selectedGeography={selectedRegion} setGeographies={setList} />
         </ZoomableGroup>
       </ComposableMap>
       {hasStarted ? (
